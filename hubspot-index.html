@@ -1,0 +1,523 @@
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Fri Dec 13 2024 21:34:53 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="675324d415e896dd328c61ce" data-wf-site="675324d415e896dd328c6172">
+<head>
+  <meta charset="utf-8">
+  <title>Hubspot Yuno - Template</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sedgwick+Ave&display=swap" rel="stylesheet">
+  <style>
+body {
+  font-family: "Manrope", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.hs-input {
+    color: #0009;
+    background-color: #fff;
+    border: 1px solid #001c301a;
+    border-radius: .5rem;
+    width: 100%;
+    min-height: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: .5rem 1.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow:none;
+    width: 100%!important;
+}
+.hs-error-msg{
+  color:red;
+  font-size: 0.65rem;
+  font-weight:400;
+}
+fieldset{
+margin-bottom: 1.5rem;
+}
+label{
+font-size: 0.75rem;
+}
+ul{
+padding:0px;
+}
+li{
+overflow:hidden;
+}
+li::marker{
+display:none;
+}
+.hs-button {
+    color: #001b2e;
+    text-align: center;
+    -webkit-text-stroke-color: #001b2e;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #001b2e;
+    border-radius: 8rem;
+    width: 100%;
+    min-height: 2.5rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    transition: all .1s;
+    display: inline-block;
+}
+.hs-button:hover{
+background-color:#3E4FE0;
+border: 1px solid #3E4FE0;
+color:white;
+}
+.hs_recaptcha{
+ margin-top: 1.5rem;
+}
+
+
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  font-family: Manrope, sans-serif;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+html.w-mod-touch * {
+  background-attachment: scroll !important;
+}
+
+input.w-button {
+  -webkit-appearance: button;
+}
+html[data-w-dynpage] [data-w-cloak] {
+  color: transparent !important;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+button,
+[type='button'],
+[type='reset'] {
+  border: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+fieldset[disabled] .w-input,
+fieldset[disabled] .w-select {
+  cursor: not-allowed;
+}
+
+fieldset[disabled]:not(.w-input-disabled) .w-input,
+fieldset[disabled]:not(.w-input-disabled) .w-select {
+  background-color: #eeeeee;
+}
+textarea.w-input,
+textarea.w-select {
+  height: auto;
+}
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+ html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+/**
+ * Remove default margin.
+ */
+body {
+  margin: 0;
+}
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+.w-layout-blockcontainer {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@media screen and (max-width: 991px) {
+  .w-layout-blockcontainer {
+    max-width: 728px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .w-layout-blockcontainer {
+    max-width: none;
+  }
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.section_hero {
+  position: relative;
+}
+
+.container_medium {
+  max-width: 67rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 20px;
+  display: block;
+}
+
+.bg_image {
+  z-index: -1;
+  position: absolute;
+  inset: 0%;
+}
+
+.image-full {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.padding-setion-small {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.hero_top {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.logo_yuno {
+  width: 6rem;
+}
+
+.logo_yuno.is_small {
+  width: 4rem;
+}
+
+.hero_grid {
+  grid-column-gap: 4rem;
+  grid-row-gap: 4rem;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr .8fr;
+  grid-auto-columns: 1fr;
+  margin-top: 3rem;
+  display: grid;
+}
+
+.text-size-large {
+  font-size: 1.5rem;
+}
+
+.body {
+  color: #121212;
+  font-size: 1rem;
+  line-height: 150%;
+}
+
+.text-size-medium {
+  font-size: 1.25rem;
+}
+
+.heading-style-h1 {
+  font-size: 3rem;
+  line-height: 120%;
+}
+
+.hero_flex_vertical {
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  flex-flow: column;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: flex;
+}
+
+.text-color-yuno {
+  color: #3e4fe0;
+}
+
+.form_hubspot {
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  background-color: #ffffff47;
+  border-radius: 1rem;
+  margin-bottom: 0;
+  padding: 2rem;
+  box-shadow: 0 2px 10px 5px #2c3cc405, 0 1px 0 1px #fff3;
+}
+
+.hubspot_script {
+  margin-bottom: 0;
+}
+
+.button_secondary {
+  border: 1px solid #3e4fe0;
+  border-radius: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: .65rem 2rem .6rem;
+  text-decoration: none;
+  display: flex;
+}
+
+.speakers_list {
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 2rem;
+  display: grid;
+}
+
+.speaker_item-flex {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.speaker_image {
+  border: 3px solid #3e4fe0;
+  border-radius: 4rem;
+  flex: none;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.text-size-small {
+  font-size: .75rem;
+  line-height: 140%;
+}
+
+.max_width_60rem {
+  max-width: 35rem;
+}
+
+.section_footer {
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+
+.footer_flex {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.socials_flex {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.hero_question-time {
+  margin-top: .5rem;
+}
+
+.hero_description {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 991px) {
+  .hero_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero_flex_vertical {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hero_grid {
+    margin-top: 4rem;
+  }
+
+  .heading-style-h1 {
+    font-size: 2rem;
+  }
+
+  .speakers_list {
+    flex-flow: column;
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+  
+{{ standard_header_includes }}
+  
+</head>
+<body class="body">
+  <section class="section_hero">
+    <div class="bg_image"><img src="https://cdn.prod.website-files.com/675324d415e896dd328c6172/67532754261a1f7acd0c1f82_bg_yuno-template.jpg" loading="lazy" sizes="100vw" srcset="images/bg_yuno-template-p-500.jpg 500w, images/bg_yuno-template-p-800.jpg 800w, images/bg_yuno-template-p-1080.jpg 1080w, images/bg_yuno-template.jpg 1440w" alt="" class="image-full"></div>
+    <div class="w-layout-blockcontainer container_medium w-container">
+      <div class="padding-setion-small">
+        <div class="hero_top"><img src="https://cdn.prod.website-files.com/675324d415e896dd328c6172/675327f82581d4bf0414cfd2_logo_yuno-template.svg" loading="lazy" alt="" class="logo_yuno">
+          <a href="#" class="button_secondary">Talk to Us</a>
+        </div>
+        <div class="hero_grid">
+          <div id="w-node-_0a67623b-2539-6165-ce79-5c4e7f856ede-328c61ce" class="column">
+            <div class="hero_flex_vertical">
+              <div class="hero_title">
+                <div class="text-size-regular">LIVE WEBINAR</div>
+                <h1 class="heading-style-h1">Simplifying Global Payouts to Drive <br>E-Commerce Growth</h1>
+              </div>
+              <div class="hero_details">
+                <div class="text-size-medium text-color-yuno"><strong>📅 Join us on January 9 at 10 a.m. EST</strong></div>
+                <div class="hero_description">
+                  <p class="text-size-regular">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+                </div>
+                <div class="speakers_list">
+                  <div class="speaker_item">
+                    <div class="speaker_item-flex"><img src="https://cdn.prod.website-files.com/675324d415e896dd328c6172/6753346d15a3567be96872e7_James%20Stack-p-500.png" loading="lazy" sizes="56px" srcset="images/James-Stack-p-500.png 500w, images/James-Stack.png 512w" alt="" class="speaker_image">
+                      <div class="speaker_details">
+                        <div><em>James Stack</em></div>
+                        <div class="text-size-small"><em>Head of product at Yuno</em></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="speaker_item">
+                    <div class="speaker_item-flex"><img src="https://cdn.prod.website-files.com/675324d415e896dd328c6172/6753346d15a3567be96872e7_James%20Stack-p-500.png" loading="lazy" sizes="56px" srcset="images/James-Stack-p-500.png 500w, images/James-Stack.png 512w" alt="" class="speaker_image">
+                      <div class="speaker_details">
+                        <div><em>James Stack</em></div>
+                        <div class="text-size-small"><em>Head of product at Yuno</em></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-d1ab19ea-fb32-7056-ef42-09585647b6f4-328c61ce" class="column">
+            <div class="form_hubspot">
+              <div class="hubspot_script w-embed w-script">
+                <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/embed/v2.js"></script>
+                <script>
+  hbspt.forms.create({
+    portalId: "22402808",
+    formId: "03d9078a-d109-4000-9fba-b177e2cf9c75"
+  });
+</script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section_content">
+    <div class="w-layout-blockcontainer container_medium w-container">
+      <div class="padding-setion-small">
+        <div class="max_width_60rem">
+          <div class="w-richtext">
+            <p>Managing global payouts is a challenge for many businesses. From complex payment routes across multiple payout providers to regional regulations and fragmented systems, these issues can slow down operations and hinder growth.</p>
+            <p>‍</p>
+            <p>Join us for a webinar featuring Yuno’s <strong>James Stack</strong> (Head of Product) and <strong>Jonathan Summerton </strong>(SVP, Enterprise Commerce) as they explore the trends and challenges of global payouts. You’ll also get an exclusive look at Yuno’s innovative Payout solution, designed to streamline payments and unify payins and payouts, helping you scale your e-commerce or marketplace business more effectively.</p>
+            <p>‍</p>
+            <h3>What you&#x27;ll learn:</h3>
+            <p>✅ Key insights into global payout trends and challenges<br>✅ Strategies for overcoming payment complexities and driving growth<br>✅ How Yuno’s Payout solution simplifies operations and integrates seamlessly with your existing systems</p>
+            <p>‍</p>
+            <p>Whether you’re managing an e-commerce platform, gig economy marketplace, or any global business, this session is packed with practical insights to help you start 2025 with streamlined payments and improved cash flow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section_footer">
+    <div class="w-layout-blockcontainer container_medium w-container">
+      <div class="footer_flex"><img src="https://cdn.prod.website-files.com/675324d415e896dd328c6172/675327f82581d4bf0414cfd2_logo_yuno-template.svg" loading="lazy" alt="" class="logo_yuno is_small">
+        <div class="socials_flex">
+          <div class="text-color-yuno w-embed"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512" width="20px" height="16px">
+              <path fill="currentColor" d="M550 124c-7-24-25-42-49-49-42-11-213-11-213-11S117 64 75 75c-24 7-42 25-49 49-11 43-11 132-11 132s0 90 11 133c7 23 25 41 49 48 42 11 213 11 213 11s171 0 213-11c24-7 42-25 49-48 11-43 11-133 11-133s0-89-11-132zM232 338V175l143 81-143 82z"></path>
+            </svg></div>
+          <div class="text-color-yuno w-embed"><svg width="16px" height="16px" viewbox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path d="M15.1169495,0 L0.88311046,0 C0.395244536,0 0,0.395243055 0,0.883047202 L0,15.1169528 C0,15.604637 0.395244536,16 0.88311046,16 L8.54610649,16 L8.54610649,9.80398211 L6.46101621,9.80398211 L6.46101621,7.38924067 L8.54610649,7.38924067 L8.54610649,5.60845879 C8.54610649,3.54184058 9.80827523,2.4165399 11.6518905,2.4165399 C12.534941,2.4165399 13.2938968,2.48230384 13.515169,2.51167879 L13.515169,4.67139763 L12.2364543,4.67199712 C11.2338653,4.67199712 11.03975,5.14841098 11.03975,5.84753498 L11.03975,7.38924067 L13.4308805,7.38924067 L13.1195048,9.80398211 L11.03975,9.80398211 L11.03975,16 L15.1169495,16 C15.6046356,16 16,15.604637 16,15.1169528 L16,0.883047202 C16,0.395243055 15.6046356,0 15.1169495,0" id="Facebook" fill="currentColor"></path>
+              </g>
+            </svg></div>
+          <div class="text-color-yuno w-embed"><svg width="16px" height="13px" viewbox="0 0 16 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path d="M0,11.3482487 C0.256805296,11.3780914 0.518116976,11.3933585 0.783057171,11.3933585 C2.32096273,11.3933585 3.7363766,10.8767565 4.85981199,10.0101072 C3.42338783,9.98400922 2.21111233,9.04978171 1.79342331,7.76596783 C1.99381104,7.80370334 2.19946596,7.82392496 2.41097333,7.82392496 C2.71038443,7.82392496 3.00037309,7.78446111 3.27584769,7.71060321 C1.77411025,7.41378894 0.64265701,6.10773704 0.64265701,4.54208788 C0.64265701,4.52849157 0.64265701,4.51495288 0.642891108,4.50147179 C1.08551154,4.74349756 1.591631,4.88885128 2.12976334,4.90561622 C1.24897034,4.32616011 0.669402685,3.33708648 0.669402685,2.21602499 C0.669402685,1.62383674 0.83128132,1.06875028 1.11383738,0.591496908 C2.73285782,2.54648435 5.15161491,3.83294836 7.87979078,3.96770157 C7.8238414,3.73120651 7.79475475,3.48457183 7.79475475,3.23131183 C7.79475475,1.44679671 9.26453784,0 11.0774498,0 C12.0215663,0 12.8746772,0.392449297 13.4734994,1.02047187 C14.2212078,0.875521429 14.9237353,0.606591112 15.5579648,0.236322228 C15.3128644,0.990859581 14.7924065,1.6241248 14.1146348,2.02406359 C14.7786532,1.94594244 15.4113025,1.77224388 16,1.51523913 C15.5598961,2.16325289 15.0033286,2.73239655 14.3620176,3.18798801 C14.3683383,3.32654358 14.3714986,3.46590572 14.3714986,3.6060168 C14.3714986,7.87612095 11.0697831,12.8 5.0319324,12.8 C3.17817038,12.8 1.45269395,12.2650776 0,11.3482487 Z" id="Twitter" fill="currentColor"></path>
+              </g>
+            </svg></div>
+          <div class="text-color-yuno w-embed"><svg width="16px" height="16px" viewbox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path d="M6.11489139e-15,14.8538596 L0,14.8538596 L0,1.14614038 C0,0.513101458 0.52935165,0 1.18237072,0 L14.8176293,0 C15.4706268,0 16,0.513101458 16,1.14614038 L16,14.8538596 C16,15.4866847 15.4706268,16 14.8176293,16 L1.18237072,16 C0.52935165,16 6.11489139e-15,15.4866847 6.11489139e-15,14.8538596 Z M4.8500952,2.60634161 L4.8500952,2.60634161 L2.4334384,2.60634161 L2.4334384,9.83123772 L4.8500952,9.83123772 L4.8500952,2.60634161 Z M3.64175604,10.8176753 L3.64171301,10.8176753 L3.62600716,10.8176753 C2.81500446,10.8176753 2.29057972,11.3724662 2.29057972,12.0657946 C2.29057972,12.7747298 2.83107607,13.3141277 3.65774158,13.3141277 C4.48449316,13.3141277 4.99331964,12.7747298 5.00902548,12.0657946 C5.00902548,11.3724662 4.48449316,10.8176753 3.64175604,10.8176753 Z M6.18730838,2.60634161 L6.18737293,2.60634161 C6.18737293,2.60634161 6.21908583,9.15330242 6.18737293,9.83123772 L8.60400822,9.83123772 L8.60400822,8.78344179 L8.58787207,8.78344179 C8.90586172,9.27666056 9.47820007,10.000775 10.7819146,10.000775 C12.3718844,10.000775 13.5641304,8.96815831 13.5641304,6.74899451 L13.5641304,2.60634161 L11.1476888,2.60634161 L11.1476888,6.47149214 C11.1476888,7.44275044 10.7978786,8.10529269 9.92340709,8.10529269 C9.25580094,8.10529269 8.85816328,7.65846684 8.6834626,7.22703403 C8.61964952,7.07267601 8.60394367,6.85695961 8.60394367,6.64102941 L8.60394367,2.60634161 L6.18730838,2.60634161 Z" id="Linkedin" fill="currentColor" transform="translate(8.000000, 8.000000) scale(1, -1) translate(-8.000000, -8.000000) "></path>
+              </g>
+            </svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+ {{ standard_footer_includes }}
+  
+</body>
+</html>

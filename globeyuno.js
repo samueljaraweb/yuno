@@ -664,7 +664,7 @@
 
           continents.forEach(continent => {
             const item = document.createElement('div');
-            item.className = 'global_region-item';
+            item.className = 'global_region-item sections_menu-item';
             item.textContent = continent;
             if (continent === selectedContinent) {
               item.classList.add('w--current');

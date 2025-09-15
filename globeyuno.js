@@ -1,4 +1,4 @@
-// Track mouse position for tooltip placement (must be defined before listeners)
+  // Track mouse position for tooltip placement (must be defined before listeners)
     var lastMousePos = { x: 0, y: 0 };
 
     // Wait for DOM to be ready
@@ -915,6 +915,93 @@
         }
 
         // Controls removed as requested
+
+        // Add window resize handler for responsiveness
+        function handleWindowResize() {
+          if (world) {
+            // Get the container element
+            const container = document.getElementById('globeViz');
+            if (container) {
+              // Force Globe.gl to recalculate its dimensions
+              const rect = container.getBoundingClientRect();
+              
+              // Update renderer size
+              const renderer = world.renderer();
+              if (renderer) {
+                renderer.setSize(rect.width, rect.height);
+                renderer.setPixelRatio(window.devicePixelRatio);
+              }
+              
+              // Update camera aspect ratio
+              const camera = world.camera();
+              if (camera) {
+                camera.aspect = rect.width / rect.height;
+                camera.updateProjectionMatrix();
+              }
+              
+              // Update controls if available to recalibrate mouse coordinates
+              const controls = world.controls();
+              if (controls) {
+                // Force controls to update with new dimensions
+                controls.update();
+                
+                // Reset the controls' internal size calculations
+                if (controls.domElement) {
+                  // Trigger a synthetic resize on the controls' DOM element
+                  const resizeEvent = new Event('resize');
+                  controls.domElement.dispatchEvent(resizeEvent);
+                }
+              }
+              
+              // Force Globe.gl to refresh its internal coordinate system
+              // Some Globe.gl versions have a refresh method, try it if available
+              if (typeof world.refresh === 'function') {
+                world.refresh();
+              }
+              
+              // Alternative: Force re-initialization of internal coordinate mapping
+              // by setting the size explicitly through Globe.gl's width/height methods
+              if (typeof world.width === 'function' && typeof world.height === 'function') {
+                world.width(rect.width).height(rect.height);
+              }
+              
+              // Force recalibration of mouse coordinate system
+              // by accessing the canvas and triggering a coordinate system reset
+              const canvas = renderer.domElement;
+              if (canvas) {
+                // Update canvas size attributes to ensure proper coordinate mapping
+                canvas.width = rect.width * window.devicePixelRatio;
+                canvas.height = rect.height * window.devicePixelRatio;
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
+                
+                // Trigger a mouse move event to recalibrate the coordinate system
+                const rect2 = canvas.getBoundingClientRect();
+                const syntheticEvent = new MouseEvent('mousemove', {
+                  clientX: rect2.left + rect2.width / 2,
+                  clientY: rect2.top + rect2.height / 2,
+                  bubbles: true
+                });
+                canvas.dispatchEvent(syntheticEvent);
+              }
+              
+              // Reset mouse tracking variables to ensure they're in sync
+              lastMousePos = { x: 0, y: 0 };
+              
+              console.log(`Globe resized to: ${rect.width}x${rect.height}`);
+            }
+          }
+        }
+
+        // Add debounced resize event listener to prevent too many updates
+        let resizeTimeout;
+        function debouncedResize() {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(handleWindowResize, 100); // 100ms debounce
+        }
+        
+        window.addEventListener('resize', debouncedResize);
+        console.log('Window resize handler added for globe responsiveness');
 
       } // End of initializeGlobe function
 

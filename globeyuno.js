@@ -1,4 +1,4 @@
-  // Track mouse position for tooltip placement (must be defined before listeners)
+   // Track mouse position for tooltip placement (must be defined before listeners)
     var lastMousePos = { x: 0, y: 0 };
 
     // Wait for DOM to be ready
@@ -99,7 +99,7 @@
         const continentMapping = {
           'North America': ['USA', 'CAN', 'MEX', 'GTM', 'BLZ', 'SLV', 'HND', 'NIC', 'CRI', 'PAN', 'CUB', 'JAM', 'HTI', 'DOM', 'TTO', 'BHS', 'BRB', 'DMA', 'GRD', 'KNA', 'LCA', 'VCT', 'ATG'],
           'South America': ['BRA', 'ARG', 'CHL', 'PER', 'COL', 'VEN', 'ECU', 'BOL', 'PRY', 'URY', 'GUY', 'SUR', 'GUF'],
-          'Europe': ['RUS', 'DEU', 'GBR', 'FRA', 'ITA', 'ESP', 'UKR', 'POL', 'ROU', 'NLD', 'BEL', 'CZE', 'GRC', 'PRT', 'SWE', 'HUN', 'AUT', 'BLR', 'CHE', 'BGR', 'SRB', 'DNK', 'FIN', 'SVK', 'NOR', 'IRL', 'HRV', 'BIH', 'ALB', 'LTU', 'SLO', 'LVA', 'EST', 'MKD', 'MDA', 'LUX', 'MLT', 'ISL', 'MNE', 'CYP', 'LIE', 'AND', 'MCO', 'SMR', 'VAT'],
+          'Europe': ['DEU', 'GBR', 'FRA', 'ITA', 'ESP', 'UKR', 'POL', 'ROU', 'NLD', 'BEL', 'CZE', 'GRC', 'PRT', 'SWE', 'HUN', 'AUT', 'BLR', 'CHE', 'BGR', 'SRB', 'DNK', 'FIN', 'SVK', 'NOR', 'IRL', 'HRV', 'BIH', 'ALB', 'LTU', 'SLO', 'LVA', 'EST', 'MKD', 'MDA', 'LUX', 'MLT', 'ISL', 'MNE', 'CYP', 'LIE', 'AND', 'MCO', 'SMR', 'VAT'],
           'Asia': ['CHN', 'IND', 'IDN', 'PAK', 'BGD', 'JPN', 'PHL', 'VNM', 'THA', 'MMR', 'KOR', 'IRQ', 'AFG', 'UZB', 'MYS', 'YEM', 'NPL', 'PRK', 'TWN', 'SYR', 'KAZ', 'KHM', 'JOR', 'AZE', 'TJK', 'LAO', 'LBN', 'KGZ', 'TKM', 'SGP', 'GEO', 'ARM', 'MNG', 'OMN', 'LKA', 'BTN', 'MDV', 'BRN'],
           'Middle East': ['TUR', 'IRN', 'SAU', 'IRQ', 'SYR', 'JOR', 'ISR', 'LBN', 'QAT', 'BHR', 'KWT', 'ARE', 'OMN', 'YEM'],
           'Africa': ['NGA', 'ETH', 'EGY', 'COD', 'TZA', 'ZAF', 'KEN', 'UGA', 'DZA', 'SDN', 'MAR', 'GHA', 'MOZ', 'AGO', 'MDG', 'CMR', 'NER', 'BFA', 'MLI', 'MWI', 'ZMB', 'SOM', 'SEN', 'TCD', 'ZWE', 'GIN', 'RWA', 'BEN', 'TUN', 'BWA', 'LBY', 'LBR', 'SLE', 'CAF', 'MRT', 'ERI', 'GAB', 'GMB', 'GIN', 'GNB', 'CIV', 'TGO', 'STP', 'COM', 'DJI', 'GNQ', 'SYC', 'MUS', 'CPV', 'SWZ', 'LSO']
@@ -113,6 +113,32 @@
           'Kosovo': 'Europe',
           'Somaliland': 'Africa'
         };
+
+        // ===== NON-SELECTABLE COUNTRIES CONFIGURATION =====
+        // Add countries to this list to make them non-selectable on the globe
+        // You can use either ISO_A3 country codes or full country names (ADMIN property)
+        const nonSelectableCountries = [
+          'RUS',      // Russia (ISO_A3 code)
+          // 'CHN',   // Uncomment to make China non-selectable
+          // 'USA',   // Uncomment to make USA non-selectable
+          // 'India', // You can also use country names
+          // Add more countries here as needed...
+        ];
+
+        // Function to check if a country is selectable
+        function isCountrySelectable(countryCode, countryName = null) {
+          // Check by ISO_A3 code
+          if (nonSelectableCountries.includes(countryCode)) {
+            return false;
+          }
+          
+          // Check by country name (ADMIN property)
+          if (countryName && nonSelectableCountries.includes(countryName)) {
+            return false;
+          }
+          
+          return true;
+        }
 
         // Function to get continent for a country
         function getContinentForCountry(countryCode, countryName = null) {
@@ -265,7 +291,7 @@
           // Set background color to light blue
           .backgroundColor('#F8F9FD')
           .showGlobe(true)
-          .globeImageUrl('data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1" fill="#F8F9FD"/></svg>'))
+          .globeImageUrl('data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1" fill="#E8EEFf"/></svg>'))
           .showAtmosphere(false)
           // Add atmosphere for bright themeimage.pngimage.png
           .hexPolygonsData(countries.features.filter(d => d.properties.ISO_A2 !== 'AQ'))
@@ -287,12 +313,18 @@
             const continent = getContinentForCountry(d.ISO_A3, d.ADMIN);
             const countryName = d.ADMIN; // Use name to avoid '-99' ISO collisions
             const colors = {
-              base: '#B0C4DE',            // Default
+              base: '#B4BBF0',            // Default
               hoverContinent: '#3E4FE0',  // Continent hover
               hoverCountry: '#3E4FE0',    // Country hover (smooth blue)
               selectedCountry: '#3E4FE0', // Country selected (deep blue)
-              selectedContinent: '#3E4FE0'// Continent selected (royal blue)
+              selectedContinent: '#3E4FE0',// Continent selected (royal blue)
+              nonSelectable: '#B4BBF0'    // Non-selectable countries (gray)
             };
+
+            // Check if country is non-selectable first
+            if (!isCountrySelectable(d.ISO_A3, d.ADMIN)) {
+              return colors.nonSelectable;
+            }
 
             // Priority: selected country > selected continent > hovered country > hovered continent > base
             if (selectedCountry && selectedCountry.properties && selectedCountry.properties.ADMIN === countryName) {
@@ -341,13 +373,23 @@
           })
           .hexPolygonLabel(({ properties: d }) => {
             const continent = getContinentForCountry(d.ISO_A3, d.ADMIN);
+            const isSelectable = isCountrySelectable(d.ISO_A3, d.ADMIN);
+            const statusText = isSelectable ? '' : '<div style="color:#ff6b6b; font-size: 10px; margin-top: 2px;">• Not selectable</div>';
+            
             return `<div style="font-family: Inter, Arial, sans-serif; font-size: 12px; line-height: 1.4;">
-        <div style="font-weight:600; color:#2D3FCC;">${d.ADMIN}</div>
+        <div style="font-weight:600; color:${isSelectable ? '#2D3FCC' : '#888888'};">${d.ADMIN}</div>
         <div style="color:#667085;">Continent: ${continent}</div>
+        ${statusText}
       </div>`;
           })
           .onHexPolygonClick((polygon) => {
             if (polygon) {
+              // Check if the country is selectable
+              if (!isCountrySelectable(polygon.properties.ISO_A3, polygon.properties.ADMIN)) {
+                console.log(`Country ${polygon.properties.ADMIN} (${polygon.properties.ISO_A3}) is not selectable`);
+                return; // Do nothing if country is not selectable
+              }
+
               // Stop auto rotation when user interacts
               stopAutoRotation();
 
@@ -410,6 +452,12 @@
           })
           .onPolygonClick(clickedD => {
             if (clickedD) {
+              // Check if the country is selectable
+              if (!isCountrySelectable(clickedD.properties.ISO_A3, clickedD.properties.ADMIN)) {
+                console.log(`Country ${clickedD.properties.ADMIN} (${clickedD.properties.ISO_A3}) is not selectable`);
+                return; // Do nothing if country is not selectable
+              }
+
               // Stop auto rotation when user interacts
               stopAutoRotation();
 
@@ -593,8 +641,8 @@
         // Function to update UI panels when user selects from globe
         function updateUIFromGlobeSelection() {
           // Update continent panel selection
-          document.querySelectorAll('.continent-item').forEach(item => {
-            item.classList.toggle('selected', item.textContent === selectedContinent);
+          document.querySelectorAll('.global_region-item').forEach(item => {
+            item.classList.toggle('w--current', item.textContent === selectedContinent);
           });
 
           // Update country panel
@@ -602,7 +650,7 @@
 
           // Update country selection in the list
           document.querySelectorAll('.country-item').forEach(item => {
-            item.classList.toggle('selected',
+            item.classList.toggle('w--current',
               selectedCountry && item.textContent === selectedCountry.properties.ADMIN
             );
           });
@@ -616,10 +664,10 @@
 
           continents.forEach(continent => {
             const item = document.createElement('div');
-            item.className = 'continent-item';
+            item.className = 'global_region-item';
             item.textContent = continent;
             if (continent === selectedContinent) {
-              item.classList.add('selected');
+              item.classList.add('w--current');
             }
             item.addEventListener('click', () => selectContinent(continent));
             continentList.appendChild(item);
@@ -640,8 +688,8 @@
           stopAutoRotation();
 
           // Update UI
-          document.querySelectorAll('.continent-item').forEach(item => {
-            item.classList.toggle('selected', item.textContent === continent);
+          document.querySelectorAll('.global_region-item').forEach(item => {
+            item.classList.toggle('w--current', item.textContent === continent);
           });
 
           // Update continent badge panel
@@ -670,6 +718,12 @@
         }
 
         function selectCountry(country) {
+          // Check if the country is selectable
+          if (!isCountrySelectable(country.properties.ISO_A3, country.properties.ADMIN)) {
+            console.log(`Country ${country.properties.ADMIN} (${country.properties.ISO_A3}) is not selectable`);
+            return; // Do nothing if country is not selectable
+          }
+
           selectedCountry = country;
           selectedContinent = getContinentForCountry(country.properties.ISO_A3, country.properties.ADMIN);
 
@@ -677,8 +731,8 @@
           stopAutoRotation();
 
           // Update UI
-          document.querySelectorAll('.continent-item').forEach(item => {
-            item.classList.toggle('selected', item.textContent === selectedContinent);
+          document.querySelectorAll('.global_region-item').forEach(item => {
+            item.classList.toggle('w--current', item.textContent === selectedContinent);
           });
 
           // Update continent badge panel
@@ -693,7 +747,7 @@
           } catch (_) { }
 
           document.querySelectorAll('.country-item').forEach(item => {
-            item.classList.toggle('selected', item.textContent === country.properties.ADMIN);
+            item.classList.toggle('w--current', item.textContent === country.properties.ADMIN);
           });
 
           // Update globe
@@ -827,13 +881,15 @@
           continentTitle.textContent = selectedContinent;
           countryList.innerHTML = '';
 
-          // Get countries for selected continent
+          // Get countries for selected continent, excluding non-selectable ones
           const continentCountries = countries.features.filter(country => {
             const continent = getContinentForCountry(country.properties.ISO_A3, country.properties.ADMIN);
-            return continent === selectedContinent;
+            const isInContinent = continent === selectedContinent;
+            const isSelectable = isCountrySelectable(country.properties.ISO_A3, country.properties.ADMIN);
+            return isInContinent && isSelectable;
           });
 
-          console.log(`Found ${continentCountries.length} countries for continent: ${selectedContinent}`);
+          console.log(`Found ${continentCountries.length} selectable countries for continent: ${selectedContinent}`);
           console.log('Countries:', continentCountries.map(c => `${c.properties.ADMIN} (${c.properties.ISO_A3})`));
 
           continentCountries.forEach(country => {
@@ -841,7 +897,7 @@
             item.className = 'country-item';
             item.textContent = country.properties.ADMIN;
             if (selectedCountry && selectedCountry.properties.ISO_A3 === country.properties.ISO_A3) {
-              item.classList.add('selected');
+              item.classList.add('w--current');
             }
             item.addEventListener('click', () => selectCountry(country));
             countryList.appendChild(item);
@@ -916,92 +972,114 @@
 
         // Controls removed as requested
 
-        // Add window resize handler for responsiveness
-        function handleWindowResize() {
+        // Add container resize handler for responsiveness
+        function handleContainerResize(rect) {
           if (world) {
-            // Get the container element
-            const container = document.getElementById('globeViz');
-            if (container) {
-              // Force Globe.gl to recalculate its dimensions
-              const rect = container.getBoundingClientRect();
-              
-              // Update renderer size
-              const renderer = world.renderer();
-              if (renderer) {
-                renderer.setSize(rect.width, rect.height);
-                renderer.setPixelRatio(window.devicePixelRatio);
-              }
-              
-              // Update camera aspect ratio
-              const camera = world.camera();
-              if (camera) {
-                camera.aspect = rect.width / rect.height;
-                camera.updateProjectionMatrix();
-              }
-              
-              // Update controls if available to recalibrate mouse coordinates
-              const controls = world.controls();
-              if (controls) {
-                // Force controls to update with new dimensions
-                controls.update();
-                
-                // Reset the controls' internal size calculations
-                if (controls.domElement) {
-                  // Trigger a synthetic resize on the controls' DOM element
-                  const resizeEvent = new Event('resize');
-                  controls.domElement.dispatchEvent(resizeEvent);
-                }
-              }
-              
-              // Force Globe.gl to refresh its internal coordinate system
-              // Some Globe.gl versions have a refresh method, try it if available
-              if (typeof world.refresh === 'function') {
-                world.refresh();
-              }
-              
-              // Alternative: Force re-initialization of internal coordinate mapping
-              // by setting the size explicitly through Globe.gl's width/height methods
-              if (typeof world.width === 'function' && typeof world.height === 'function') {
-                world.width(rect.width).height(rect.height);
-              }
-              
-              // Force recalibration of mouse coordinate system
-              // by accessing the canvas and triggering a coordinate system reset
-              const canvas = renderer.domElement;
-              if (canvas) {
-                // Update canvas size attributes to ensure proper coordinate mapping
-                canvas.width = rect.width * window.devicePixelRatio;
-                canvas.height = rect.height * window.devicePixelRatio;
-                canvas.style.width = rect.width + 'px';
-                canvas.style.height = rect.height + 'px';
-                
-                // Trigger a mouse move event to recalibrate the coordinate system
-                const rect2 = canvas.getBoundingClientRect();
-                const syntheticEvent = new MouseEvent('mousemove', {
-                  clientX: rect2.left + rect2.width / 2,
-                  clientY: rect2.top + rect2.height / 2,
-                  bubbles: true
-                });
-                canvas.dispatchEvent(syntheticEvent);
-              }
-              
-              // Reset mouse tracking variables to ensure they're in sync
-              lastMousePos = { x: 0, y: 0 };
-              
-              console.log(`Globe resized to: ${rect.width}x${rect.height}`);
+            // Update renderer size
+            const renderer = world.renderer();
+            if (renderer) {
+              renderer.setSize(rect.width, rect.height);
+              renderer.setPixelRatio(window.devicePixelRatio);
             }
+            
+            // Update camera aspect ratio
+            const camera = world.camera();
+            if (camera) {
+              camera.aspect = rect.width / rect.height;
+              camera.updateProjectionMatrix();
+            }
+            
+            // Update controls if available to recalibrate mouse coordinates
+            const controls = world.controls();
+            if (controls) {
+              // Force controls to update with new dimensions
+              controls.update();
+              
+              // Reset the controls' internal size calculations
+              if (controls.domElement) {
+                // Trigger a synthetic resize on the controls' DOM element
+                const resizeEvent = new Event('resize');
+                controls.domElement.dispatchEvent(resizeEvent);
+              }
+            }
+            
+            // Force Globe.gl to refresh its internal coordinate system
+            // Some Globe.gl versions have a refresh method, try it if available
+            if (typeof world.refresh === 'function') {
+              world.refresh();
+            }
+            
+            // Alternative: Force re-initialization of internal coordinate mapping
+            // by setting the size explicitly through Globe.gl's width/height methods
+            if (typeof world.width === 'function' && typeof world.height === 'function') {
+              world.width(rect.width).height(rect.height);
+            }
+            
+            // Force recalibration of mouse coordinate system
+            // by accessing the canvas and triggering a coordinate system reset
+            const canvas = renderer.domElement;
+            if (canvas) {
+              // Update canvas size attributes to ensure proper coordinate mapping
+              canvas.width = rect.width * window.devicePixelRatio;
+              canvas.height = rect.height * window.devicePixelRatio;
+              canvas.style.width = rect.width + 'px';
+              canvas.style.height = rect.height + 'px';
+              
+              // Trigger a mouse move event to recalibrate the coordinate system
+              const rect2 = canvas.getBoundingClientRect();
+              const syntheticEvent = new MouseEvent('mousemove', {
+                clientX: rect2.left + rect2.width / 2,
+                clientY: rect2.top + rect2.height / 2,
+                bubbles: true
+              });
+              canvas.dispatchEvent(syntheticEvent);
+            }
+            
+            // Reset mouse tracking variables to ensure they're in sync
+            lastMousePos = { x: 0, y: 0 };
+            
+            console.log(`Globe container resized to: ${rect.width}x${rect.height}`);
           }
         }
 
-        // Add debounced resize event listener to prevent too many updates
-        let resizeTimeout;
-        function debouncedResize() {
-          clearTimeout(resizeTimeout);
-          resizeTimeout = setTimeout(handleWindowResize, 100); // 100ms debounce
+        // Setup ResizeObserver to monitor container size changes
+        const container = document.getElementById('globeViz');
+        if (container) {
+          // Debounce mechanism for resize events
+          let resizeTimeout;
+          function debouncedContainerResize(entries) {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              const entry = entries[0];
+              if (entry) {
+                const rect = entry.contentRect;
+                handleContainerResize(rect);
+              }
+            }, 50); // 50ms debounce for better responsiveness
+          }
+
+          // Check if ResizeObserver is supported
+          if (typeof ResizeObserver !== 'undefined') {
+            const resizeObserver = new ResizeObserver(debouncedContainerResize);
+            resizeObserver.observe(container);
+            console.log('ResizeObserver set up to monitor globe container size changes');
+          } else {
+            // Fallback to window resize for older browsers
+            function fallbackWindowResize() {
+              const rect = container.getBoundingClientRect();
+              handleContainerResize(rect);
+            }
+            
+            let fallbackTimeout;
+            function debouncedFallbackResize() {
+              clearTimeout(fallbackTimeout);
+              fallbackTimeout = setTimeout(fallbackWindowResize, 100);
+            }
+            
+            window.addEventListener('resize', debouncedFallbackResize);
+            console.log('Fallback window resize handler added (ResizeObserver not supported)');
+          }
         }
-        
-        window.addEventListener('resize', debouncedResize);
-        console.log('Window resize handler added for globe responsiveness');
 
       } // End of initializeGlobe function
 

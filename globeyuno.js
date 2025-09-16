@@ -506,7 +506,6 @@
           // Access the Three.js scene through Globe.gl's internal structure
           const scene = world.scene();
           if (scene && window.THREE) {
-            scene.background = null;
             // Access the Three.js scene through Globe.gl's internal structure
             // Set scene background to white
             // scene.background = new window.THREE.Color(0xffffff);
